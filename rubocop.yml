@@ -1,0 +1,104 @@
+# Equipe's shared RuboCop configuration: Rails Omakase, plus consistent
+# formatting of multiline code, class structure, Lint and Security.
+
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+AllCops:
+  NewCops: enable
+
+Lint:
+  Enabled: true
+Security:
+  Enabled: true
+
+# Two-space indentation, with methods below private/protected indented one step.
+Layout/IndentationStyle:
+  Enabled: true
+  IndentationWidth: 2
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: indented_internal_methods
+Layout/DefEndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: def
+
+# Multiline code, following Standard (standardrb): fixed indentation rather
+# than aligning with the opening parenthesis, and leading dots in call chains.
+Layout/ArgumentAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/FirstArgumentIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/ClosingParenthesisIndentation:
+  Enabled: true
+Layout/HashAlignment:
+  Enabled: true
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+Layout/FirstHashElementIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/ArrayAlignment:
+  Enabled: true
+  EnforcedStyle: with_fixed_indentation
+Layout/FirstArrayElementIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+Layout/BlockAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+# Multiline arrays have one element per line and the brackets on lines of their own.
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+Layout/MultilineArrayBraceLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+
+Layout/EmptyLines:
+  Enabled: true
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+
+Style/Lambda:
+  Enabled: true
+  EnforcedStyle: literal
+
+# The same order in every class. Moving callbacks, associations and validations
+# can change behavior, so the autocorrection is unsafe: review before moving,
+# and keep an order that matters with an inline disable and the reason.
+Layout/ClassStructure:
+  Enabled: true
+  Include:
+    - app/**/*.rb
+  Categories:
+    module_inclusion: [include, prepend, extend]
+    attribute_macros: [attr_accessor, attr_reader, attr_writer, attribute, enum, serialize, store_accessor, normalizes]
+    association: [belongs_to, has_one, has_many, has_and_belongs_to_many, has_one_attached, has_many_attached, accepts_nested_attributes_for]
+    validation: [validates, validate, validates_presence_of, validates_uniqueness_of, validates_associated]
+    callback: [after_initialize, before_validation, after_validation, before_save, after_save, before_create, after_create, before_update, after_update, before_destroy, after_destroy, after_commit, after_rollback, after_touch]
+    scope: [scope, default_scope]
+    delegate: [delegate]
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_attribute_macros
+    - association
+    - validation
+    - callback
+    - scope
+    - public_delegate
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_methods
+    - private_methods
