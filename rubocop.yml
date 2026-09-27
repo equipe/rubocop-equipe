@@ -26,7 +26,7 @@ Layout/DefEndAlignment:
   EnforcedStyleAlignWith: def
 
 # Multiline code, following Standard (standardrb): fixed indentation rather
-# than aligning with the opening parenthesis, and leading dots in call chains.
+# than aligning with the opening parenthesis. Dot position is left to the project.
 Layout/ArgumentAlignment:
   Enabled: true
   EnforcedStyle: with_fixed_indentation

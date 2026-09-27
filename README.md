@@ -7,7 +7,8 @@ It builds on [rubocop-rails-omakase](https://github.com/rails/rubocop-rails-omak
 the Rails default, and adds:
 
 - Formatting of multiline code, following [Standard](https://github.com/standardrb/standard):
-  fixed indentation for arguments, hashes and arrays, and leading dots in call chains.
+  fixed indentation for arguments, hashes, arrays and call chains. Whether the dots
+  in a call chain lead or trail is up to each project.
 - Multiline arrays with one element per line, and `->` for lambdas.
 - Methods below `private` and `protected` indented one step.
 - A single order for class bodies (`Layout/ClassStructure`).
