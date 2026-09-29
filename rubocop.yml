@@ -73,8 +73,11 @@ Layout/MultilineArrayBraceLayout:
 
 Layout/EmptyLines:
   Enabled: true
+
+# The blocks of a concern are separated like defs.
 Layout/EmptyLineBetweenDefs:
   Enabled: true
+  DefLikeMacros: [included, prepended, class_methods, concerning]
 
 Style/Lambda:
   Enabled: true
