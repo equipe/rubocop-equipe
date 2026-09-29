@@ -41,6 +41,14 @@ class ItInSingleLineBlockTest < Minitest::Test
     assert_correction "users.map { |user| user.roles.map { |role| role.name } }", "users.map { |user| user.roles.map { it.name } }"
   end
 
+  def test_replaces_the_inner_parameter_inside_a_multiline_block
+    assert_correction "users.each do |user|\n  user.roles.map { |role| role.name }\nend", "users.each do |user|\n  user.roles.map { it.name }\nend"
+  end
+
+  def test_keeps_an_inner_parameter_when_the_block_uses_the_outer_it
+    assert_no_offense "users.map { it.roles.map { |role| it.grant(role) } }"
+  end
+
   def test_keeps_blocks_that_already_call_it
     assert_no_offense "describe { |user| it(user) }"
   end
