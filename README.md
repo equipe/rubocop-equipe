@@ -15,6 +15,14 @@ the Rails default, and adds:
 - The Lint and Security departments.
 - The Performance department, with the cops that are on by default and
   `Performance/SelectMap`. Tests are excluded, as in Omakase.
+- Empty lines between the `included`, `prepended`, `class_methods` and
+  `concerning` blocks of a concern, as between defs.
+- `it` for the only parameter of a single-line brace block, with our own cop
+  `Equipe/ItInSingleLineBlock`, and a named parameter in longer blocks
+  (`Style/ItBlockParameter`). Both need Ruby 3.4. rubocop-performance 1.27
+  does not see `it` blocks in most of its block cops, such as `SelectMap`,
+  `Detect` and `MapCompact`, so those patterns go unnoticed in new code until
+  that is fixed upstream.
 
 Metrics stay disabled, as in Omakase.
 
@@ -44,6 +52,10 @@ is ready for it.
    `bin/rubocop --auto-gen-config --no-exclude-limit --auto-gen-only-exclude`
    and include `.rubocop_todo.yml` with `inherit_from`.
 3. Clean up one cop at a time, removing its exclusions from the todo file.
+
+## Development
+
+The cops live in `lib/rubocop/cop/equipe`. Run their tests with `bundle exec rake`.
 
 ## Class structure
 

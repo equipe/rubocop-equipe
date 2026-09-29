@@ -3,6 +3,9 @@
 
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
+require:
+  - ./lib/rubocop/cop/equipe/it_in_single_line_block.rb
+
 AllCops:
   NewCops: enable
 
@@ -82,6 +85,14 @@ Layout/EmptyLineBetweenDefs:
 Style/Lambda:
   Enabled: true
   EnforcedStyle: literal
+
+# `it` for the only parameter of a single-line brace block, a named parameter
+# in longer blocks. Both need Ruby 3.4 and are skipped on older targets.
+Equipe/ItInSingleLineBlock:
+  Enabled: true
+Style/ItBlockParameter:
+  Enabled: true
+  EnforcedStyle: allow_single_line
 
 # The same order in every class. Moving callbacks, associations and validations
 # can change behavior, so the autocorrection is unsafe: review before moving,

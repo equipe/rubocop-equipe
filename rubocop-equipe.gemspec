@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.summary  = "Shared RuboCop configuration for Equipe's Ruby projects"
   spec.homepage = "https://github.com/equipe/rubocop-equipe"
 
-  spec.files    = ["rubocop.yml", "README.md"]
+  spec.files    = ["rubocop.yml", "README.md", *Dir["lib/**/*.rb"]]
 
   spec.required_ruby_version = ">= 3.2"
 
