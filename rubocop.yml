@@ -1,5 +1,5 @@
 # Equipe's shared RuboCop configuration: Rails Omakase, plus consistent
-# formatting of multiline code, class structure, Lint and Security.
+# formatting of multiline code, class structure, Lint, Security and Performance.
 
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
@@ -9,6 +9,13 @@ AllCops:
 Lint:
   Enabled: true
 Security:
+  Enabled: true
+
+# All the performance cops that are on by default, where Omakase only keeps
+# FlatMap, plus SelectMap for filter_map. Tests stay excluded, as in Omakase.
+Performance:
+  Enabled: true
+Performance/SelectMap:
   Enabled: true
 
 # Two-space indentation, with methods below private/protected indented one step.

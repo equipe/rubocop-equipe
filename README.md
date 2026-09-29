@@ -13,6 +13,8 @@ the Rails default, and adds:
 - Methods below `private` and `protected` indented one step.
 - A single order for class bodies (`Layout/ClassStructure`).
 - The Lint and Security departments.
+- The Performance department, with the cops that are on by default and
+  `Performance/SelectMap`. Tests are excluded, as in Omakase.
 
 Metrics stay disabled, as in Omakase.
 
@@ -30,13 +32,13 @@ end
 inherit_gem: { rubocop-equipe: rubocop.yml }
 ```
 
-Project-specific rules go below. Add the Rails or Performance departments there
-when a project is ready for them.
+Project-specific rules go below. Add the Rails department there when a project
+is ready for it.
 
 ## Adopting it in an existing project
 
-1. Run `bin/rubocop -a`. Everything outside Lint, Security and
-   `Layout/ClassStructure` is safe to autocorrect, so commit it on its own and
+1. Run `bin/rubocop -a`. Everything outside Lint, Security, Performance
+   and `Layout/ClassStructure` is safe to autocorrect, so commit it on its own and
    add the commit to `.git-blame-ignore-revs`.
 2. Record the remaining offenses with
    `bin/rubocop --auto-gen-config --no-exclude-limit --auto-gen-only-exclude`
