@@ -5,19 +5,33 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 require:
   - ./lib/rubocop/cop/equipe/it_in_single_line_block.rb
+  - ./lib/rubocop/cop/equipe/assignment_in_template.rb
 
 AllCops:
   NewCops: enable
+  # The ERB templates too, beside RuboCop's own files, for Equipe/AssignmentInTemplate.
+  inherit_mode:
+    merge:
+      - Include
+  Include:
+    - "**/*.erb"
 
 Lint:
   Enabled: true
+  Exclude: ["**/*.erb"]
 Security:
   Enabled: true
+  Exclude: ["**/*.erb"]
 
 # All the performance cops that are on by default, where Omakase only keeps
 # FlatMap, plus SelectMap for filter_map. Tests stay excluded, as in Omakase.
 Performance:
   Enabled: true
+  inherit_mode:
+    merge:
+      - Exclude
+  Exclude:
+    - "**/*.erb"
 Performance/SelectMap:
   Enabled: true
 
@@ -123,3 +137,28 @@ Layout/ClassStructure:
     - public_methods
     - protected_methods
     - private_methods
+
+# No local variables in ERB templates: a value a template names is the
+# parameter of a block. The templates are read by this cop alone, so the other
+# departments leave them out, Lint, Security and Performance in their sections
+# above. To Lint/Syntax a template is not Ruby.
+Equipe/AssignmentInTemplate:
+  Enabled: true
+  Include:
+    - "**/*.erb"
+Bundler:
+  Exclude: ["**/*.erb"]
+Gemspec:
+  Exclude: ["**/*.erb"]
+Layout:
+  Exclude: ["**/*.erb"]
+Metrics:
+  Exclude: ["**/*.erb"]
+Migration:
+  Exclude: ["**/*.erb"]
+Naming:
+  Exclude: ["**/*.erb"]
+Rails:
+  Exclude: ["**/*.erb"]
+Style:
+  Exclude: ["**/*.erb"]

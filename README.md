@@ -23,6 +23,11 @@ the Rails default, and adds:
   does not see `it` blocks in most of its block cops, such as `SelectMap`,
   `Detect` and `MapCompact`, so those patterns go unnoticed in new code until
   that is fixed upstream.
+- No local variables in ERB templates, with our own cop
+  `Equipe/AssignmentInTemplate`: a value a template names is the parameter of
+  a block, `value.then do |name|`, several as `[ a, b ].then do |a, b|`.
+  RuboCop reads the templates for this cop alone, and every other department
+  leaves out `**/*.erb`.
 
 Metrics stay disabled, as in Omakase.
 
