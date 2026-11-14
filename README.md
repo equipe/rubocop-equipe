@@ -23,6 +23,10 @@ the Rails default, and adds:
   does not see `it` blocks in most of its block cops, such as `SelectMap`,
   `Detect` and `MapCompact`, so those patterns go unnoticed in new code until
   that is fixed upstream.
+- Only `index`, `show`, `new`, `edit`, `create`, `update` and `destroy` in a
+  controller, with our own cop `Equipe/NonRestfulAction`: every public method
+  of a controller is an action, so another one gets a controller of its own
+  or goes private. Controller concerns are modules and are not checked.
 - No local variables in ERB templates, with our own cop
   `Equipe/AssignmentInTemplate`: a value a template names is the parameter of
   a block, `value.then do |name|`, several as `[ a, b ].then do |a, b|`.
